@@ -1,7 +1,7 @@
 # Blog Application (Ruby on Rails)
 
 ## Project Scope
-This is a Blog application using the RSpec TDD and Capybara BDD because there are popular and widely used in the industry.
+This is a Blog application using the RSpec TDD and Capybara BDD because there are popular and widely used in the industry. This application allow us to create blog post and post in online using Rails 5 framework.
 
 ## Testing Scope
 ### Unit Tests
@@ -299,6 +299,11 @@ Solution 2: Add the destroy action in articles controller as followed
 - refactor the article controller using filters
   (i.e insert @ article = Article.find(params[:id]) into set_article method within private)
 
-- create a partial file, "__form.html.erb" in
+- create a partial file, "form.html.erb" in
   app/views/articles directory
-  (i.e cut all the common code from new.html.erb and edit.html.erb except the heading and paste into __form.html.erb )
+  (i.e cut all the common code from new.html.erb and edit.html.erb except the heading and paste into form.html.erb )
+
+## Adding Devise Gem for User Management
+- Visit Devise Github repo for installation and setup
+  information
+-
