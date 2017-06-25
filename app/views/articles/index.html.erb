@@ -1,4 +1,16 @@
 <h1>Articles#index</h1>
 <p>Find me in app/views/articles/index.html.erb</p>
 
-<%= link_to "New Article", new_article_path %>
+<%= link_to "New Article", new_article_path, class: "btn btn-default btn-lg", id: "new-article-btn" %>
+
+<% @articles.each do |article| %>
+  <div class="well well-lg">
+    <div class="article-title">
+      <%= link_to article.title, article_path(article) %>
+    </div>
+    <div class="article-body">
+      <!--Limit the number of words from article shown in this page-->
+      <%= truncate(article.body, length: 500) %>
+    </div>
+  </div>
+<% end %>

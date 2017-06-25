@@ -147,5 +147,29 @@ The above Guard gem is used to test the following scenario
 - The Guard file will automatically state the failure/errors so developers could make adjustment as neccessary.
 
 In order to pass/solge above failures/errors,
-- need to integrate ifelse statement in the create action in articles_controller.rb file to show the right flash message if user properly fill in the form inputs
-- need to add form display error messages into new.html.erb file
+- need to integrate ifelse statement in the create action in articles_controller.rb file to show the right flash message if user properly fill in the form inputs.
+- need to add form display error messages into new.html.erb file.
+
+##### Listing Articles Feature Test
+In feature folder, create a file "listing_article_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- create a number of articles
+- list the number of articles
+- expect both article titles and bodies to be present
+
+Inside the articles/index.html.erb file, add in <% @ articles.each do |article| %> to go list through all created article. However, you would still get the following list of failures.
+
+Failure 1: ActionView::Template::Error:
+           undefined method "each"
+
+Solution 1: Add @ articles = Article.all into index
+            action in articles_controller.rb
+            (i.e to list all articles in index page)
+
+Failure 2: Failure/Error: expect(page).to
+           have_link(@article1.title)
+           expected to find link "Thie first article"
+
+Solution 2: Add <%= link_to article.title,
+            article_path(article) %> into articles/index.html.erb file
+            (i.e add in a link to show the actual created article path)
