@@ -180,3 +180,23 @@ Failure 3: Capybara::ElementNotFound:
 
 Solution 3: Add in contents <h1 id="no-aritcles">No
             Articles Created</h1> and ifelse statement to show the message to user as required. This will be done in  index.html.erb
+
+##### Show Article Feature Test
+In feature folder, create a file "show_article_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- create 1 article to display
+- show the article title and details
+
+Of course, you will get the following failures.
+
+Failure 1: AbstractController::ActionNotFound:
+           The action 'show' could not be found
+
+Solution 1: Add in def show end into
+            articles_controller.rb file and add in @ article = Article.find(params[:id])
+            (i.e define show action and find article by its id)
+
+Failure 2: Show action template is missing
+
+Solution 2: Implement show.html.erb under views/articles
+            directory
