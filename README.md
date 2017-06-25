@@ -296,3 +296,9 @@ Solution 2: Add the destroy action in articles controller as followed
   end
 
 ## REFACTOR THE EXISTING CODE
+- refactor the article controller using filters
+  (i.e insert @ article = Article.find(params[:id]) into set_article method within private)
+
+- create a partial file, "__form.html.erb" in
+  app/views/articles directory
+  (i.e cut all the common code from new.html.erb and edit.html.erb except the heading and paste into __form.html.erb )
