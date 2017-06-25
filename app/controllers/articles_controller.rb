@@ -7,12 +7,18 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # Create new articel instance and pass in params
     @article = Article.new(article_params)
+    # Article is saved
     if @article.save
+      # Show success message
       flash[:success] = "Article has been created"
+      # Redirect to all articles page
       redirect_to articles_path
     else
-      flash[:danger] = "Article has not been created"
+      # Show warning message only at that instance
+      flash.now[:danger] = "Article has not been created"
+      # Display create article page as new again
       render :new
     end
   end
@@ -20,6 +26,7 @@ class ArticlesController < ApplicationController
   private
 
     def article_params
+      # Pass in article; permitting require attributes
       params.require(:article).permit(:title, :body)
     end
 
