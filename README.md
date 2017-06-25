@@ -156,6 +156,7 @@ In feature folder, create a file "listing_article_spec.rb". Inside the file writ
 - create a number of articles
 - list the number of articles
 - expect both article titles and bodies to be present
+- expect some message when there are no articles been added
 
 Inside the articles/index.html.erb file, add in <% @ articles.each do |article| %> to go list through all created article. However, you would still get the following list of failures.
 
@@ -167,9 +168,15 @@ Solution 1: Add @ articles = Article.all into index
             (i.e to list all articles in index page)
 
 Failure 2: Failure/Error: expect(page).to
-           have_link(@article1.title)
+           have_link(@ article1.title)
            expected to find link "Thie first article"
 
 Solution 2: Add <%= link_to article.title,
             article_path(article) %> into articles/index.html.erb file
             (i.e add in a link to show the actual created article path)
+
+Failure 3: Capybara::ElementNotFound:
+           Unable to find css "h1#no_articles"
+
+Solution 3: Add in contents <h1 id="no-aritcles">No
+            Articles Created</h1> and ifelse statement to show the message to user as required. This will be done in  index.html.erb

@@ -24,4 +24,28 @@ RSpec.feature "Creating Articles" do
     expect(page).to have_link(@article1.title)
     expect(page).to have_link(@article2.title)
   end
+
+  # User has no article
+  scenario "A user has no article" do
+    # Purge all existing article
+    Article.delete_all
+    # Navigate to root page
+    visit "/"
+
+    # User expecting no article content with title & body
+    expect(page).not_to have_content(@article1.title)
+    expect(page).not_to have_content(@article1.body)
+
+    expect(page).not_to have_content(@article2.title)
+    expect(page).not_to have_content(@article2.body)
+
+    # User expecting no actual article link by title
+    expect(page).not_to have_link(@article1.title)
+    expect(page).not_to have_link(@article2.title)
+
+    # Display no article created
+    within ("h1#no_articles") do
+      expect(page.to have_content("No Articles Created")
+    end
+  end
 end
