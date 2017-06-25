@@ -133,3 +133,9 @@ Solution 14: Add in some flash message codes into the body
              tag (i.e flash.each do |key, message|) for each blog post
 
 Finally, we get 1 example, 0 failures after all test been passed. Now go to localhost:3000/articles and click create new article. This will direct user to localhost:3000/articles/new page. After filling up the form, new article message will flash success once directed back to localhost:3000/articles.
+
+##### Add Automating Testing using following Gems
+Insert the Gems into development section in Gemfile
+- gem 'guard', '~>2.14.0'
+- gem 'guard-rspec', '~> 4.7.2'
+- gem 'guard-cucumber', '~> 2.1.2'
