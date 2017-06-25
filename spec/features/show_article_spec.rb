@@ -4,7 +4,7 @@ RSpec.feature "Showing an article" do
 
   before do
     # User to create article first
-    @article = Article.create(title: "Thie first article", body: "Lorem ipsum dolar sit amet, consectetur.")
+    @article = Article.create(title: "This first article", body: "Lorem ipsum dolar sit amet, consectetur.")
   end
 
   scenario "A user shows an article" do

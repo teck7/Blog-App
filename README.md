@@ -295,4 +295,4 @@ Solution 2: Add the destroy action in articles controller as followed
     end
   end
 
-## Next is REFACTOR EXISTING CODE
+## REFACTOR THE EXISTING CODE

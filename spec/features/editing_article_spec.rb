@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Editing an article" do
   # User to create article first
-  @article = Article.create(title: "Thie first article", body: "Lorem ipsum dolar sit amet, consectetur.")
+  @article = Article.create(title: "Title One", body: "Body of article one")
 
   # User update an article
   scenario "A user updates an article" do
@@ -15,14 +15,14 @@ RSpec.feature "Editing an article" do
     click_link "Edit Article"
 
     # Modified Contents
-    fill_in "Title", with "Updated Title"
-    fill_in "Body", with "Updated Body"
+    fill_in "Title", with: "Updated Title"
+    fill_in "Body", with: "Updated Body"
 
     # Update Article action
     click_button "Update Article"
 
     expect(page).to have_content("Article has been updated")
-    expect(page.cuurent_path).to eq(article_path(@article))
+    expect(page.current_path).to eq(article_path(@article))
   end
 
 
@@ -36,13 +36,13 @@ RSpec.feature "Editing an article" do
     click_link "Edit Article"
 
     # Modified Contents
-    fill_in "Title", with ""
-    fill_in "Body", with ""
+    fill_in "Title", with: ""
+    fill_in "Body", with: "Updated Body of Article"
 
     # Update Article action
     click_button "Update Article"
 
     expect(page).to have_content("Article has not been updated")
-    expect(page.cuurent_path).to eq(article_path(@article))
+    expect(page.current_path).to eq(article_path(@article))
   end
 end

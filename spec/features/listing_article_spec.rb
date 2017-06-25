@@ -44,8 +44,10 @@ RSpec.feature "Creating Articles" do
     expect(page).not_to have_link(@article2.title)
 
     # Display no article created
-    within ("h1#no_articles") do
-      expect(page.to have_content("No Articles Created")
+    within ("h1#no-articles") do
+     expect(page).to have_content("No Articles Created")
     end
+
   end
+
 end
