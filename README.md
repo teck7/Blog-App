@@ -266,3 +266,33 @@ Solution 4: Create the update action in
               render :edit
             end
             end
+
+##### Delete Article Feature Test
+In feature folder, create a file "delete_article_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- show the article title and details
+- delete article contents (title and body)
+- what if article is not deleted correctly
+
+Of course, you will get the following failures.
+
+Failure 1: Unable to find link "Delete Article"
+
+Solution 1: In app/views/articles/show.html.erb, add in <%= link_to "Delete Article", article_path(@ article),
+method: :delete,
+data: { confirm: "Are you sure you want to delete article?" },
+class: "btn btn-primary btn-lg btn-space" %>
+
+Failure 2: Action 'destroy' could not be found for ArticlesController
+
+Solution 2: Add the destroy action in articles controller as followed
+
+  def destroy
+    @ article = Article.find(params[:id])
+  if @ article.destroy
+    flash[:success] = "Article has been deleted."
+    redirect_to articles_path
+    end
+  end
+
+## Next is REFACTOR EXISTING CODE
