@@ -204,7 +204,7 @@ Solution 2: Implement show.html.erb under views/articles
 ##### Request Article Error Feature Test
 In spec folder, create a request folder and inside create articles_spec.rb file. Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
 
-- write some responses if no article found
+- write some web responses if no article found
 
 Failure 1: ActiveRecord::RecordNotFound:
            Couldn't find Article with 'id'=xxxx
@@ -227,3 +227,42 @@ Solution 1: it in the application controller by adding
               flash[:alert] = message
               redirect_to root_path
               end
+
+##### Show Article Feature Test
+In feature folder, create a file "edit_article_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- show the article title and details
+- update article contents (title and body)
+- what if article is not updated correctly
+
+Of course, you will get the following failures.
+
+Failure 1: Unable to find link "Edit Article"
+
+Solution 1: In show.html.erb file,add the link:
+            <%= link_to "Edit Article", edit_article_path(@ article), class: "btn btn-primary btn-lg btn-space" %>
+
+Failure 2: The action 'edit' could not be for ArticlesController
+
+Solution 2: Add the edit action and inside the edit action add in @ article = Article.find(params[:id])
+
+Failure 3: ActionController::UnknownFormat:
+           ArticlesController#edit is missing a template for this request
+
+Failure 4: AbstractController::ActionNotFound:
+            The action 'update' could not be found for ArticlesController
+
+Solution 4: Create the update action in
+            articles_controller.rb file:
+            Inside the update action add in
+
+            @ article = Article.find(params[:id])
+
+            if @ article.update(article_params)
+              flash[:success] = "Article has been updated"
+              redirect_to @ article
+            else
+              flash.now[:danger] = "Article has not been updated"
+              render :edit
+            end
+            end
