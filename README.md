@@ -19,6 +19,9 @@ This is a Blog application using the RSpec TDD and Capybara BDD because there ar
 - emulate a user such as logging in and clicking on a submit blog button
 
 ### RSpec and Capybara
+- Add gem 'rspec-rails', '~> 3.4', '>= 3.4.2' into
+  development
+- Add gem 'capybara', '~> 2.7', '>= 2.7.1' into test
 - write out the scenario in a test file
 
 #### First Step
