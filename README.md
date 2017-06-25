@@ -23,3 +23,9 @@ This is a Blog application using the RSpec TDD and Capybara BDD because there ar
 
 #### First Step
 - Build the features one by one until the test passes
+
+##### Process & Strategy
+- Create a branch to do the development work
+- Write feature test
+- Build feature to make test pass one by one
+- Once the feature test passes with no errors - merge with master branch
