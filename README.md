@@ -306,4 +306,27 @@ Solution 2: Add the destroy action in articles controller as followed
 ## Adding Devise Gem for User Management
 - Visit Devise Github repo for installation and setup
   information
--
+
+### User Signup Setup Feature Test
+In feature folder, create a file "signing_up_users_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- vist root first
+- click on sign-up link
+- email
+- password
+- password confirmation
+- sign-up
+- invalid Signup
+- do an invalid sign-up and ensure that it fails
+
+Of course, you will get the following failures.
+
+Failure 1: Unable to find link 'Sign up'
+
+Solution 1: Add <li><%= link_to "Sign up",
+            new_user_registration_path %></li> into application.html.erb
+            (i.e after <li class="active"><%= link_to "Authors", "#" %></li>)
+
+            Add <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            into application.html.erb
+            (i.e after <li class="active"><%= link_to "Authors", "#" %></li>)
