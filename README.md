@@ -139,3 +139,13 @@ Insert the Gems into development section in Gemfile
 - gem 'guard', '~>2.14.0'
 - gem 'guard-rspec', '~> 4.7.2'
 - gem 'guard-cucumber', '~> 2.1.2'
+
+If run "guard" on CLI, the testing framework keeps running in the background, and do no t need to run rspec on CLI regularly. To let this happen, needs to change the Guardfile contents. The testing would be run automatically in the background just to check if anything is broken dynamically.
+
+The above Guard gem is used to test the following scenario
+- Write a second scenario to test what if the user has not fill out the form properly before submitting the article post.
+- The Guard file will automatically state the failure/errors so developers could make adjustment as neccessary.
+
+In order to pass/solge above failures/errors,
+- need to integrate ifelse statement in the create action in articles_controller.rb file to show the right flash message if user properly fill in the form inputs
+- need to add form display error messages into new.html.erb file
