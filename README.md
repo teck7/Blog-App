@@ -200,3 +200,30 @@ Failure 2: Show action template is missing
 
 Solution 2: Implement show.html.erb under views/articles
             directory
+
+##### Request Article Error Feature Test
+In spec folder, create a request folder and inside create articles_spec.rb file. Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- write some responses if no article found
+
+Failure 1: ActiveRecord::RecordNotFound:
+           Couldn't find Article with 'id'=xxxx
+
+Solution 1: it in the application controller by adding
+            the code below:
+
+            rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+
+            protected
+
+            def resource_not_found
+            end
+
+             In articles controller:
+
+             protected
+              def resource_not_found
+              message = "The article you are looking for could not be found"
+              flash[:alert] = message
+              redirect_to root_path
+              end
