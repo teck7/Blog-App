@@ -411,4 +411,108 @@ Solution 2: Hide the link in the header partial
             <% else %>
             <li><%= link_to "Sign up", new_user_registration_path %></li>
             <li><%= link_to "Sign in", new_user_session_path %></li>
-            <% end %> ...)
+            <% end %>
+            )
+
+## Retrict Access Feature Test
+- Hide the "New Article" button from non-signed in users
+- Hide the "Edit" and "Delete" buttons from non-owners of the article
+- permit the owner to edit or delete
+
+### Things TODO to pass all Tests
+#### TODO 1
+In listing_article_spec.rb, update first scenario like,
+
+scenario "with articles created and user not signed in" do
+  visit "/"
+  expect(page).to have_content(@ article1.title)
+  expect(page).to have_content(@ article1.body)
+  expect(page).to have_content(@ article2.title)
+  expect(page).to have_content(@ article2.body)
+  expect(page).to have_link(@ article1.title)
+  expect(page).to have_link(@ article2.title)
+  expect(page).not_to have_link("New Article")
+end
+
+#### Resolve all failures
+Failure 1: fails with finding "New Article" link
+Solution 1: Update index.html.erb in views/articles
+            (i.e wrap the new article button with the following:
+            <% if user_signed_in? %>
+            <%= link_to "New Article", new_article_path, class: "btn btn-default btn-lg", id: "new-article-btn" %>
+            <% end %>)
+
+#### TODO 2
+In listing_article_spec.rb, update second scenario like,
+
+scenario "with articles created and user signed in" do
+    login_as(@ john)
+    visit "/"
+    expect(page).to have_content(@ article1.title)
+    expect(page).to have_content(@ article1.body)
+    expect(page).to have_content(@ article2.title)
+    expect(page).to have_content(@ article2.body)
+    expect(page).to have_link(@ article1.title)
+    expect(page).to have_link(@ article2.title)
+    expect(page).to have_link("New Article")
+end
+
+Update john to be @ john in the before do (all 3 instances)
+
+#### TODO 3
+- In show_article_spec.rb, update second scenario like,
+add a 2nd user @ fred, and update john to be @ john, update the article to be created by @ john (instead of john)
+
+- Update the two scenarios like,
+
+scenario "to a non-signed in user hides Edit/Delete Links" do
+  visit "/"
+  click_link @ article.title
+  expect(page).to have_content(@ article.title)
+  expect(page).to have_content(@ article.body)
+  expect(current_path).to eq(article_path(@ article))
+  expect(page).not_to have_link("Edit Article")
+  expect(page).not_to have_link("Delete Article")
+end
+
+scenario "A non-owner signed in cannot see both links" do
+  login_as(@ fred)
+  visit "/"
+  click_link @ article.title
+  expect(page).not_to have_link("Edit Article")
+  expect(page).not_to have_link("Delete Article")
+end
+
+#### TODO 4
+- make the 1st scenario pass
+In show.html.erb, modify as followed
+
+<% if user_signed_in? %>
+  <div class="edit-delete">
+    <%= link_to "Edit Article", edit_article_path(@ article),
+        class: "btn btn-primary btn-lg btn-space" %>
+    <%= link_to "Delete Article", article_path(@ article),    method: :delete,
+    data: { confirm: "Are you sure you want to delete article?" }, class: "btn btn-primary btn-lg btn-space" %>
+  </div>
+<% end %>
+
+#### TODO 5
+- make the 2nd scenario pass
+
+Add following to the if user_signed_in? line:
+
+<% if user_signed_in? && current_user == @ article.user %>
+
+#### TODO 6
+- add the last scenario to the spec to ensure signed in owners of articles see both links
+
+scenario "A signed in owner sees both links" do
+  login_as(@ john)
+  visit "/"
+  click_link @ article.title
+  expect(page).to have_content(@ article.title)
+  expect(page).to have_content(@ article.body)
+  expect(current_path).to eq(article_path(@ article))
+  expect(page).to have_link("Edit Article")
+  expect(page).to have_link("Delete Article")
+end
