@@ -516,3 +516,5 @@ scenario "A signed in owner sees both links" do
   expect(page).to have_link("Edit Article")
   expect(page).to have_link("Delete Article")
 end
+
+## Restrict Access Level on Controller Level
