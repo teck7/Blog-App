@@ -376,3 +376,7 @@ Solution 3: Modify the links to look like (just under the
               <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
               <li><%= link_to "Sign in", new_user_session_path %></li>
               )
+
+## REFACTOR LATEST CODE
+- factor the layout file into partials
+  (i.e create a folder within views called shared. In the shared folder create a file called header.html.erb and cut the header portion from the layout file (application.html.erb) and paste it into this file)
