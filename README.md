@@ -1,7 +1,9 @@
 # Blog Application (Ruby on Rails)
 
 ## Project Scope
-This is a Blog application using the RSpec TDD and Capybara BDD because there are popular and widely used in the industry. This application allow us to create blog post and post in online using Rails 5 framework.
+This is a Blog application using the RSpec TDD and Capybara BDD because there are popular and widely used in the industry.
+
+This application allow user to create simple blog post and post in online using Rails 5.0.1 framework. User must sign up first before being able to create and post article.
 
 ## Testing Scope
 ### Unit Tests
