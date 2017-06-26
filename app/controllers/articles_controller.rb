@@ -31,11 +31,10 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    #@article = Article.find(params[:id])
+
   end
 
   def edit
-    #@article = Article.find(params[:id])
     unless @article.user == current_user
       flash[:alert] = "You can only edit your own article."
       redirect_to root_path
@@ -43,7 +42,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    #@article = Article.find(params[:id])
     unless @article.user == current_user
       flash[:danger] = "You can only edit your own article."
       redirect_to root_path
@@ -59,7 +57,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    #@article = Article.find(params[:id])
     if @article.destroy
       flash[:success] = "Article has been deleted."
       redirect_to articles_path

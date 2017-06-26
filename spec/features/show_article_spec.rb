@@ -29,7 +29,7 @@ RSpec.feature "Showing an article" do
     expect(page).not_to have_link("Delete Article")
   end
 
-  scenario "to non-owner hide the Edit and Delete buttons" do
+  scenario "A non-owner signed in cannot see Edit and Delete buttons" do
     # login as different owner rather than john
     login_as(@fred)
 
@@ -38,13 +38,6 @@ RSpec.feature "Showing an article" do
 
     # Link on article's title
     click_link @article.title
-
-    # User expecting article content with title & body
-    expect(page).to have_content(@article.title)
-    expect(page).to have_content(@article.body)
-
-    # Ensure the article path is equal to the path that the article is created
-    expect(current_path).to eq(article_path(@article))
 
     # Ensure page not to have edit / delete links if not signed in
     expect(page).not_to have_link("Edit Article")
@@ -55,9 +48,11 @@ RSpec.feature "Showing an article" do
     login_as(@john)
     visit "/"
     click_link @article.title
+
     expect(page).to have_content(@article.title)
     expect(page).to have_content(@article.body)
     expect(current_path).to eq(article_path(@article))
+
     expect(page).to have_link("Edit Article")
     expect(page).to have_link("Delete Article")
   end

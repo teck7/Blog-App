@@ -32,7 +32,7 @@ RSpec.describe "Articles", type: :request do
       end
     end
 
-    context 'with signed in user as owner successful edit' do
+    context 'with signed in user as owner' do
       before do
         login_as(@john)
         get "/articles/#{@article.id}/edit"

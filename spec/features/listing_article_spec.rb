@@ -31,9 +31,7 @@ RSpec.feature "Creating Articles" do
 
   # User list the article and signed in
   scenario "with articles created and user signed in" do
-    #Signed in as john
     login_as(@john)
-
     # Navigate to root page
     visit "/"
 
@@ -49,7 +47,7 @@ RSpec.feature "Creating Articles" do
     expect(page).to have_link(@article2.title)
 
     #Updated for retrict access
-    expect(page).not_to have_link("New Article")
+    expect(page).to have_link("New Article")
   end
 
   # User has no article
