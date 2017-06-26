@@ -330,3 +330,49 @@ Solution 1: Add <li><%= link_to "Sign up",
             Add <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
             into application.html.erb
             (i.e after <li class="active"><%= link_to "Authors", "#" %></li>)
+
+### User Signin Setup Feature Test
+In feature folder, create a file "signing_users_in_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+- vist root first
+- click on sign-inp link
+- email
+- password
+- sign-in
+- sign-up
+- invalid Sign-in
+- invalid Sign-up
+- do an invalid sign-in and ensure that it fails
+- do an invalid sign-up and ensure that it fails
+
+Of course, you will get the following failures.
+
+Failure 1: Unable to find link 'Sign in'
+
+Solution 1: Add <li><%= link_to "Sign in",
+            new_user_session_path %></li> into application.html.erb
+
+Failure 2: Expected to find signed in as!!!!
+
+Solution 2: Add the following code below sign-in:
+
+            <% if user_signed_in? %>
+              Signed in as <%= "#{current_user.email}" %>
+            <% end %>
+
+Failure 3: Failure/Error: expect(page).not_to have_link("Sign
+           in") expected not to find link "Sign in"
+
+Solution 3: Modify the links to look like (just under the
+            Author link in application.html.erb)
+
+            <% unless user_signed_in? %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+
+            (i.e Get rid of              
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+              )

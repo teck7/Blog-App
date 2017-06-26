@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
 
+  # Ensure a user is signin except for a couple of action
+  before_action :authenticate_user!, except: [:index, :show]
   #Filter with method called set_article on certain action
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @articles = Article.all
   end
