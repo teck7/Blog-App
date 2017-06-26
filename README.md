@@ -335,7 +335,7 @@ Solution 1: Add <li><%= link_to "Sign up",
 In feature folder, create a file "signing_users_in_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
 
 - vist root first
-- click on sign-inp link
+- click on sign-in link
 - email
 - password
 - sign-in
@@ -380,3 +380,35 @@ Solution 3: Modify the links to look like (just under the
 ## REFACTOR LATEST CODE
 - factor the layout file into partials
   (i.e create a folder within views called shared. In the shared folder create a file called header.html.erb and cut the header portion from the layout file (application.html.erb) and paste it into this file)
+
+  ### User Signout Setup Feature Test
+  In feature folder, create a file "signing_users_out_spec.rb". Inside the file write out all neccessary codes before running rspec in CLI. Then, solve any failure step by step.
+
+  - vist root first
+  - click on sign-in link
+  - email
+  - password
+  - sign-in
+  - sign-out
+
+Failure 1: Unable to find link "Sign out"
+
+Solution 1: Add <li><%= link_to "Sign out",
+            destroy_user_session_path, method: :delete %>
+            </li> o the header partial, above the Sign up link.
+
+Failure 2: Failure/Error: expect(page).not_to
+           have_content("Sign out")
+           expected not to find text "Sign out"
+
+Solution 2: Hide the link in the header partial
+            (i.e
+            <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li>
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+            </li>
+            <% else %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %> ...)
